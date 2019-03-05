@@ -1,9 +1,7 @@
 from Sound import Note, Sound
-
-def readMusic(f):
-
+from helper import getNote, readMusic, playMusic
 
 if __name__ == '__main__' :
     sounds = readMusic("FurElise.txt")
-    S = Sound(Note.C, 4)
-    S.playSound()
+    playMusic(sounds)
+
