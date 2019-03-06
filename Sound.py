@@ -43,6 +43,14 @@ class Sound:
         self.duration = duration
         self.volume = 0.5
 
+    def __eq__(self, other):
+        if (self.note == other.note):
+            return seld.duration == other.duration
+        else: return self.note == other.note
+
+    def getNote(self):
+        return self.note
+
     def getHz(self):
         return Sound.noteToHz[self.note]
 
