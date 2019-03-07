@@ -13,6 +13,30 @@ noteDict = {'C'  : Note.C,
             'AS' : Note.AS,
             'B'  : Note.B }
 
+noteToLily = { Note.C  : 'c',
+               Note.CS : 'cis',
+               Note.D  : 'd',
+               Note.DS : 'dis',
+               Note.E  : 'e',
+               Note.F  : 'f',
+               Note.FS : 'fis',
+               Note.G  : 'g',
+               Note.GS : 'gis',
+               Note.A  : 'a',
+               Note.AS : 'as',
+               Note.B  : 'b' }
+
+durationToLily = { 2 : 4,
+                 1.5 : 2,
+                 1 : 1,
+                 0.5 : 8}
+
+def durationLily(duration):
+    return durationToLily[duration]
+
+def getLily(note):
+    return noteToLily[note]
+
 def getNote(note):
     return noteDict[note]
 
