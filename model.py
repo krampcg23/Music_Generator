@@ -1,4 +1,4 @@
-from helper import readMusic, drange
+from helper import drange, readMusic
 from Sound import Note, Sound
 from collections import defaultdict
 import random
@@ -10,7 +10,7 @@ class MarkovModel:
         self.chainLength = n
         self.lengthOfSong = 100
 
-    def readMusic(self):
+    def readMusic_Model(self):
         l = os.listdir("music")
         for f in l:
             direc = "music/" + f
@@ -28,7 +28,7 @@ class MarkovModel:
         for i in range(self.lengthOfSong):
             sound.playSound()
             if sound.getNote() not in self.model:
-                sound = Sound(Note.DS, 0.5)
+                sound = Sound(Note.DS, 4, 0.5)
             listOfSounds = self.model[sound.getNote()]
             r = random.randint(0, len(listOfSounds)-1)
             sound = listOfSounds[r]

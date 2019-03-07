@@ -17,29 +17,30 @@ class Note(Enum):
     AS = 11
     B = 12
 
-
-fs = 44100 # The Sample Rate
+fs = 44100
 class Sound:
-    noteToHz = {Note.C  : 261.63,
-                Note.CS : 277.18,
-                Note.D  : 293.66,
-                Note.DS : 311.13,
-                Note.E  : 329.63,
-                Note.F  : 349.23,
-                Note.FS : 369.99,
-                Note.G  : 392.00,
-                Note.GS : 415.30,
-                Note.A  : 440.00,
-                Note.AS : 466.16,
-                Note.B  : 493.88 }
+    noteToHz = {Note.C  : 16.351,
+                Note.CS : 17.324,
+                Note.D  : 18.354,
+                Note.DS : 19.445,
+                Note.E  : 20.601,
+                Note.F  : 21.827,
+                Note.FS : 23.124,
+                Note.G  : 24.499,
+                Note.GS : 25.956,
+                Note.A  : 27.5,
+                Note.AS : 29.135,
+                Note.B  : 30.868}
 
     def __init__(self):
         self.note = Note.C
         self.duration = 0
         self.volume = 0.5
+        self.octave = 4
 
-    def __init__(self, note, duration):
+    def __init__(self, note, octave, duration):
         self.note = note
+        self.octave = octave
         self.duration = duration
         self.volume = 0.5
 
@@ -52,7 +53,7 @@ class Sound:
         return self.note
 
     def getHz(self):
-        return Sound.noteToHz[self.note]
+        return Sound.noteToHz[self.note] * pow(2, self.octave)
 
     def generateWave(self):
         return (np.sin(2*np.pi*np.arange(fs*self.duration)*self.getHz()/fs)).astype(np.float32)

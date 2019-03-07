@@ -26,9 +26,8 @@ def readMusic(f):
     sounds = []
     for line in F:
         l = line.split()
-        for i in drange(0, len(l), 2):
-            s = Sound(getNote(l[i]), float(l[i+1]))
-            i = i+1
+        for i in drange(0, len(l), 3):
+            s = Sound(getNote(l[i]), float(l[i+1]), float(l[i+2]))
             sounds.append(s)
 
     return sounds
