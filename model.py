@@ -6,9 +6,12 @@ import os
 
 class MarkovModel:
     def __init__ (self, n):
-        self.model = defaultdict(Note)
+        if n == 1:
+            self.model = defaultdict(Note)
+        else:
+            self.model = defaultdict((Note))
         self.chainLength = n
-        self.lengthOfSong = 100
+        self.lengthOfSong = 50
 
     def saveMusic(self, music):
         f = open("newSong.ly", "w")
@@ -45,22 +48,40 @@ class MarkovModel:
 
     def addSong(self, f):
         sounds = readMusic(f)
-        for i in drange(0, len(sounds)-1, 1):
-            self.model.setdefault(sounds[i].getNote(), []).append(sounds[i+1])
+        for i in drange(0, len(sounds)-self.chainLength, 1):
+            if self.chainLength == 1:
+                self.model.setdefault(sounds[i].getNote(), []).append(sounds[i+1])
+            else:
+                chain = []
+                for j in range(self.chainLength):
+                    chain.append(sounds[i+j].getNote())
+                chainTuple = tuple(chain)
+                self.model.setdefault(chainTuple, []).append(sounds[i+self.chainLength])
 
     def generateMusic(self, seed):
         listOfSounds = self.model[seed]
         r = random.randint(0, len(listOfSounds)-1)
         sound = listOfSounds[r]
         theSong = []
+        if self.chainLength != 1:
+            newSeed = seed[1:self.chainLength] + (sound.getNote(),)
         for i in range(self.lengthOfSong):
             theSong.append(sound)
             sound.playSound()
-            if sound.getNote() not in self.model:
-                sound = Sound(Note.DS, 4, 0.5)
-            listOfSounds = self.model[sound.getNote()]
+            if self.chainLength == 1:
+                if sound.getNote() not in self.model:
+                    sound = seed
+            else:
+                if newSeed not in self.model:
+                    sound = seed
+                    newSeed = seed
+                else:
+                    sound = newSeed
+            listOfSounds = self.model[sound]
             r = random.randint(0, len(listOfSounds)-1)
             sound = listOfSounds[r]
+            newSeed = newSeed[1:self.chainLength] + (sound.getNote(),)
+
         self.saveMusic(theSong)
 
 

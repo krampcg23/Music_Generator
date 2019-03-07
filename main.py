@@ -5,12 +5,13 @@ from model import MarkovModel
 if __name__ == '__main__' :
     #sound = Sound(Note.E, 10)
     #sound.playSound()
-    #sound2 = Sound(Note.G, 10)
-    #sound.playChord(sound2)
+    #seed = Sound(Note.A, 5, 1)
 
-    mm = MarkovModel(1)
+    mm = MarkovModel(2)
     mm.readMusic_Model()
-    mm.generateMusic(Note.DS)
+    seed = (Note.A, Note.B)
+    #seed = Note.A
+    mm.generateMusic(seed)
     #sounds = readMusic("music/summers.txt")
     #sounds = readMusic("music/canon.txt")
     #playMusic(sounds)

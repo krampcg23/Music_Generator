@@ -27,7 +27,7 @@ noteToLily = { Note.C  : 'c',
                Note.AS : 'as',
                Note.B  : 'b' }
 
-durationToLily = { 2 : 4,
+durationToLily = { 2 : 2,
                  1.5 : 2,
                  1 : 1,
                  0.5 : 8}
