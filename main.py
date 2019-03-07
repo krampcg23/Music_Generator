@@ -11,7 +11,7 @@ if __name__ == '__main__' :
     mm = MarkovModel(1)
     mm.readMusic_Model()
     mm.generateMusic(Note.DS)
-    #sounds = readMusic("music/FurElise.txt")
+    #sounds = readMusic("music/summers.txt")
     #sounds = readMusic("music/canon.txt")
     #playMusic(sounds)
 
