@@ -25,6 +25,8 @@ def readMusic(f):
     F = open(f, 'r')
     sounds = []
     for line in F:
+        if (line[0] == "#"):
+            continue
         l = line.split()
         for i in drange(0, len(l), 3):
             s = Sound(getNote(l[i]), float(l[i+1]), float(l[i+2]))
