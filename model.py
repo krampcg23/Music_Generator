@@ -19,7 +19,9 @@ class MarkovModel:
         f.write('title = "My Lovely Song"\n')
         f.write('}\n')
         f.write("{\n")
+        f.write("\\time 4/4\n")
         counter = 0
+        prevDuration = '0'
         for sound in music:
             note = getLily(sound.note)
             if sound.octave > 4:
@@ -28,7 +30,10 @@ class MarkovModel:
             elif sound.octave < 4:
                 for i in range(4 - int(sound.octave)):
                     note = note = ","
-            note = note + str(durationLily(sound.duration))
+            myDuration = str(durationLily(sound.duration))
+            if prevDuration != myDuration:
+                note = note + myDuration
+            prevDuration = myDuration
             f.write(note + " ")
             counter = counter + 1
             if (counter == 4):

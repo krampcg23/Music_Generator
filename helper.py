@@ -29,7 +29,7 @@ noteToLily = { Note.C  : 'c',
 
 durationToLily = { 2 : 2,
                  1.5 : 2,
-                 1 : 1,
+                 1 : 4,
                  0.5 : 8}
 
 def durationLily(duration):
